@@ -1,5 +1,6 @@
 package br.com.neresfelip.gfxconsultoria.data.remote;
 
+import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

@@ -1,4 +1,4 @@
-package br.com.neresfelip.gfxconsultoria.data.remote;
+package br.com.neresfelip.gfxconsultoria.data.remote.response;
 
 import androidx.annotation.NonNull;
 

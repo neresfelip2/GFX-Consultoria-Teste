@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import br.com.neresfelip.gfxconsultoria.BuildConfig;
-import br.com.neresfelip.gfxconsultoria.data.remote.ListPokemonResponse;
-import br.com.neresfelip.gfxconsultoria.data.remote.PokemonResponse;
+import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
+import br.com.neresfelip.gfxconsultoria.data.remote.response.PokemonResponse;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 
 public class PokemonMapper {

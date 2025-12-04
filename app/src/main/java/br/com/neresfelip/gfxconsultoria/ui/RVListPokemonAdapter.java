@@ -13,11 +13,11 @@ import java.util.List;
 import br.com.neresfelip.gfxconsultoria.databinding.PokemonItemBinding;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 
-public class MAdapter extends RecyclerView.Adapter<MAdapter.MViewHolder> {
+public class RVListPokemonAdapter extends RecyclerView.Adapter<RVListPokemonAdapter.MViewHolder> {
 
     private final List<Pokemon> list;
 
-    public MAdapter(List<Pokemon> list) {
+    public RVListPokemonAdapter(List<Pokemon> list) {
         this.list = list;
     }
 

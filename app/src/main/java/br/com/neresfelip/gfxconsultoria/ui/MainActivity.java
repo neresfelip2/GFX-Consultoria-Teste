@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
 
         viewModel.pokemonList
-                .observe(this, movies -> binding.rvMain.setAdapter(new MAdapter(movies)));
+                .observe(this, movies -> binding.rvMain.setAdapter(new RVListPokemonAdapter(movies)));
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

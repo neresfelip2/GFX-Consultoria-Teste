@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import br.com.neresfelip.gfxconsultoria.data.remote.RepositoryCallback;
+import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallback;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
 
@@ -28,7 +28,6 @@ public class MainViewModel extends ViewModel {
         loadPokemons();
     }
 
-    /** Embora a tarefa peça o uso da AsyncTask, eu não implementei ela devido ao Retrofit dispensar o uso dela e a AsyncTask está deprecated há alguns anos.*/
     private void loadPokemons() {
 
         /** aqui é a chamada para a api

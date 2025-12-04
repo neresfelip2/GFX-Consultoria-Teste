@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import br.com.neresfelip.gfxconsultoria.data.remote.RepositoryCallback;
+import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallback;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
 import br.com.neresfelip.gfxconsultoria.view_model.MainViewModel;
