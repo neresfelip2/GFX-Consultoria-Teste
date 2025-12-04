@@ -1,41 +1,70 @@
 package br.com.neresfelip.gfxconsultoria.data.repository;
 
+import android.os.AsyncTask;
+
 import java.util.List;
+
+import javax.inject.Inject;
 
 import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
 import br.com.neresfelip.gfxconsultoria.data.remote.PokemonAPI;
 import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallback;
-import br.com.neresfelip.gfxconsultoria.data.remote.RetrofitClient;
 import br.com.neresfelip.gfxconsultoria.domain.mapper.PokemonMapper;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class PokemonRepositoryImpl implements PokemonRepository {
 
-    private final PokemonAPI api;
+    private final PokemonAPI pokeAPI;
 
-    /** Aqui eu instanciei a depedência do Repository no construtor apenas por questão de exemplo.
-     * Mas em projetos reais, aqui também eu utilizaria o Dagger/Hilt para injetar essa dependência automaticamente. Como faço em outros projetos em meu GitHub */
-    public PokemonRepositoryImpl() {
-        Retrofit retrofit = RetrofitClient.getInstance();
-        api = retrofit.create(PokemonAPI.class);
+    public PokemonRepositoryImpl(PokemonAPI pokeAPI) {
+        this.pokeAPI = pokeAPI;
     }
-
-    /** Embora a tarefa peça o uso da AsyncTask, eu não implementei ela porque estou usando a biblioteca Retrofit e ela dispensa o uso da AsyncTask, já que ela
-     * está deprecated há alguns anos.
-     * O enqueue() por si só já faz uma requisição assíncrona à API e substitui ela.
-     * */
 
     @Override
     public void getPokemons(RepositoryCallback<List<Pokemon>> callback) {
 
-        api.getPokemons().enqueue(new Callback<>() {
+        /**
+         * Este seria um exemplo de uso do AsyncTask (deprecated) solicitado na tarefa
+         * */
+
+        new AsyncTask<Void, Void, List<Pokemon>>() {
+
+            private Throwable error;
+
             @Override
-            public void onResponse(Call<ListPokemonResponse> call, Response<ListPokemonResponse> response) {
+            protected List<Pokemon> doInBackground(Void... voids) {
+                try {
+                    Response<ListPokemonResponse> response = pokeAPI.getPokemons().execute();
+                    if (response.isSuccessful()) {
+                        return PokemonMapper.map(response.body());
+                    } else {
+                        error = new Exception("Erro HTTP: " + response.code());
+                        return null;
+                    }
+                } catch (Throwable t) {
+                    error = t;
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(List<Pokemon> pokemons) {
+                if (error != null) {
+                    callback.onError(error);
+                } else {
+                    callback.onSuccess(pokemons);
+                }
+            }
+        }.execute();
+
+
+        /** O trecho comentado abaixo é a melhor forma do uso do Retrofit atualmente (utilizando enqueue, que por si só já faz uma chamada assincrona para a API) */
+
+        /*pokeAPI.getPokemons().enqueue(new Callback<>() {
+            @Override
+            public void onResponse(@NonNull Call<ListPokemonResponse> call, @NonNull Response<ListPokemonResponse> response) {
                 if (response.isSuccessful()) {
                     List<Pokemon> list = PokemonMapper.map(response.body());
                     callback.onSuccess(list);
@@ -45,10 +74,10 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             }
 
             @Override
-            public void onFailure(Call<ListPokemonResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ListPokemonResponse> call, @NonNull Throwable t) {
                 callback.onError(t);
             }
-        });
+        });*/
 
     }
 

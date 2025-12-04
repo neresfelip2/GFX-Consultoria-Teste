@@ -42,8 +42,8 @@ public class MainViewModelTest {
 
         // DADO
         List<Pokemon> fakeList = Arrays.asList(
-                new Pokemon("bulbasaur", "1"),
-                new Pokemon("charmander", "4")
+                new Pokemon(1,"bulbasaur", BuildConfig.API_URL_IMG + 1 + ".png"),
+                new Pokemon(4,"charmander", BuildConfig.API_URL_IMG + 4 + ".png")
         );
 
         // QUANDO o repository for chamado, simula o retorno
@@ -61,7 +61,7 @@ public class MainViewModelTest {
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals("bulbasaur", result.get(0).getTitle());
+        assertEquals("bulbasaur", result.get(0).getName());
     }
 }
 

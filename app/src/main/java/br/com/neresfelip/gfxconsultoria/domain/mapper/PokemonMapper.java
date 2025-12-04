@@ -2,6 +2,7 @@ package br.com.neresfelip.gfxconsultoria.domain.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,10 +21,16 @@ public class PokemonMapper {
         }
 
         for (PokemonResponse item : response.getList()) {
-            pokemons.add(new Pokemon(
-                    item.getName(),
-                    BuildConfig.API_URL_IMG + extractPokemonId(item.getUrl()) + ".png"
-            ));
+
+            int pokemonId = extractPokemonId(item.getUrl());
+
+            pokemons.add(
+                    new Pokemon(
+                            pokemonId,
+                            item.getName(),
+                            BuildConfig.API_URL_IMG + pokemonId + ".png"
+                    )
+            );
         }
 
         return pokemons;
@@ -34,7 +41,7 @@ public class PokemonMapper {
         Matcher matcher = pattern.matcher(url);
 
         if (matcher.find()) {
-            return Integer.parseInt(matcher.group(1));
+            return Integer.parseInt(Objects.requireNonNull(matcher.group(1)));
         }
         return -1;
     }

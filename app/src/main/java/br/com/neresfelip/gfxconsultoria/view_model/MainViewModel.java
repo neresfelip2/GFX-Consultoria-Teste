@@ -8,10 +8,14 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallback;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
+@HiltViewModel
 public class MainViewModel extends ViewModel {
 
     private final PokemonRepository repository;
@@ -19,6 +23,7 @@ public class MainViewModel extends ViewModel {
     private final MutableLiveData<List<Pokemon>> _pokemonList = new MutableLiveData<>();
     public LiveData<List<Pokemon>> pokemonList = _pokemonList;
 
+    @Inject
     public MainViewModel(PokemonRepository repository) {
         this.repository = repository;
         loadPokemons();
@@ -43,7 +48,7 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onError(Throwable t) {
-                Log.d("teste", t.getMessage());
+                Log.d(MainViewModel.class.getName(), t.getMessage());
             }
         });
 
