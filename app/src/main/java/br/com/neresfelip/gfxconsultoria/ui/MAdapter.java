@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import br.com.neresfelip.gfxconsultoria.databinding.PokemonItemBinding;
@@ -50,6 +52,11 @@ public class MAdapter extends RecyclerView.Adapter<MAdapter.MViewHolder> {
         }
 
         public void set(Pokemon item) {
+
+            Picasso.get()
+                    .load(item.getUrlImage())
+                    .into(binding.pokemonImage);
+
             binding.pokemonName.setText(item.getTitle());
         }
 

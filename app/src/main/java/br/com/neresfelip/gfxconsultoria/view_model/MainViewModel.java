@@ -8,23 +8,32 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import br.com.neresfelip.gfxconsultoria.data.PokemonRepositoryImpl;
 import br.com.neresfelip.gfxconsultoria.data.remote.RepositoryCallback;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
 
 public class MainViewModel extends ViewModel {
 
-    PokemonRepository repository = new PokemonRepositoryImpl();
+    private final PokemonRepository repository;
 
     private final MutableLiveData<List<Pokemon>> _pokemonList = new MutableLiveData<>();
     public LiveData<List<Pokemon>> pokemonList = _pokemonList;
 
-    public MainViewModel() {
+    public MainViewModel(PokemonRepository repository) {
+        this.repository = repository;
         loadPokemons();
     }
 
+    public void loadPokemonsForTest() {  // usado só no teste unitário
+        loadPokemons();
+    }
+
+    /** Embora a tarefa peça o uso da AsyncTask, eu não implementei ela devido ao Retrofit dispensar o uso dela e a AsyncTask está deprecated há alguns anos.*/
     private void loadPokemons() {
+
+        /** aqui é a chamada para a api
+        não estou fazendo nenhum tipo de tratamento do status da chamada (carregando, sucesso e erro) apenas para mostrar o funcionamento do livedata diretamente
+        mas em projetos reais, eu costumo criar um wrapper para tratar estes status da chamada e utilizo ele no LiveData */
 
         repository.getPokemons(new RepositoryCallback<>() {
 
@@ -35,9 +44,10 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onError(Throwable t) {
-                Log.i("teste", t.getMessage());
+                Log.d("teste", t.getMessage());
             }
         });
 
     }
 }
+

@@ -2,26 +2,26 @@ package br.com.neresfelip.gfxconsultoria.domain.model;
 
 public class Pokemon {
     private String title;
-    private String urlPoster;
+    private String urlImage;
 
-    public Pokemon(String title, String urlPoster) {
+    public Pokemon(String title, String urlImage) {
         this.title = title;
-        this.urlPoster = urlPoster;
+        this.urlImage = urlImage;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getUrlPoster() {
-        return urlPoster;
+    public String getUrlImage() {
+        return urlImage;
     }
 
     @Override
     public String toString() {
         return "Pokemon{" +
                 "title='" + title + '\'' +
-                ", urlPoster='" + urlPoster + '\'' +
+                ", urlImage='" + urlImage + '\'' +
                 '}';
     }
 }

@@ -1,12 +1,9 @@
-package br.com.neresfelip.gfxconsultoria.data;
-
-import android.util.Log;
+package br.com.neresfelip.gfxconsultoria.data.repository;
 
 import java.util.List;
 
 import br.com.neresfelip.gfxconsultoria.data.remote.ListPokemonResponse;
 import br.com.neresfelip.gfxconsultoria.data.remote.PokemonAPI;
-import br.com.neresfelip.gfxconsultoria.data.remote.PokemonResponse;
 import br.com.neresfelip.gfxconsultoria.data.remote.RepositoryCallback;
 import br.com.neresfelip.gfxconsultoria.data.remote.RetrofitClient;
 import br.com.neresfelip.gfxconsultoria.domain.mapper.PokemonMapper;

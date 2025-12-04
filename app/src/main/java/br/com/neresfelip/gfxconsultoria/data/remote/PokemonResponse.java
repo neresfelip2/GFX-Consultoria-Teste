@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class PokemonResponse {
 
+    private int id;
+
     @SerializedName("name")
     private String name;
 
