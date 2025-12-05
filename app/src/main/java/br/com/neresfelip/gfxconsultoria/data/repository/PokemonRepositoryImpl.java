@@ -3,6 +3,8 @@ package br.com.neresfelip.gfxconsultoria.data.repository;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
+/** estes imports não utilizados estão aqui devido o trecho comentado que utiliza eles, que na apresentação irei descomentar para demonstrar eles */
+
 import androidx.annotation.NonNull;
 
 import java.util.List;

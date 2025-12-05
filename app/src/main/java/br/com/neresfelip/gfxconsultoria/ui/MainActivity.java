@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import br.com.neresfelip.gfxconsultoria.ui.rv_adapter.ListPokemonAdapter;
 import br.com.neresfelip.gfxconsultoria.view_model.MainViewModel;
-import br.com.neresfelip.gfxconsultoria.R;
 import br.com.neresfelip.gfxconsultoria.databinding.ActivityMainBinding;
 import dagger.hilt.android.AndroidEntryPoint;
 
