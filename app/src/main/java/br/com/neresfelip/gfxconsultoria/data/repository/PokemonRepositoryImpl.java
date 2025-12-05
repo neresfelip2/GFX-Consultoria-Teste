@@ -70,7 +70,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
         /** O trecho comentado abaixo é a melhor forma do uso do Retrofit atualmente (utilizando enqueue, que por si só já faz uma chamada assincrona para a API) */
 
-        pokeAPI.getPokemons().enqueue(new Callback<>() {
+        /*pokeAPI.getPokemons().enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<ListPokemonResponse> call, @NonNull Response<ListPokemonResponse> response) {
                 if (response.isSuccessful()) {
@@ -85,7 +85,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             public void onFailure(@NonNull Call<ListPokemonResponse> call, @NonNull Throwable t) {
                 callback.onError(t);
             }
-        });
+        });*/
 
     }
 
