@@ -1,5 +1,6 @@
 package br.com.neresfelip.gfxconsultoria.data.repository;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
         this.pokeAPI = pokeAPI;
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public void getPokemons(boolean onlyEven, RepositoryCallback<List<Pokemon>> callback) {
 
@@ -98,7 +100,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
     }
 
-    public List<Pokemon> filterEven(List<Pokemon> list) {
+    public List<Pokemon> filterEven(@NonNull List<Pokemon> list) {
         return list.stream()
                 .filter(p -> p.getId() % 2 == 0)
                 .collect(Collectors.toList());
