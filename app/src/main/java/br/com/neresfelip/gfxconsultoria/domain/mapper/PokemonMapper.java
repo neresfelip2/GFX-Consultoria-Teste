@@ -1,39 +1,33 @@
 package br.com.neresfelip.gfxconsultoria.domain.mapper;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import br.com.neresfelip.gfxconsultoria.BuildConfig;
 import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
-import br.com.neresfelip.gfxconsultoria.data.remote.response.PokemonResponse;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 
 public class PokemonMapper {
 
     public static List<Pokemon> map(ListPokemonResponse response) {
-        List<Pokemon> pokemons = new ArrayList<>();
-
         if (response == null || response.getList() == null) {
-            return pokemons;
+            return Collections.emptyList();
         }
 
-        for (PokemonResponse item : response.getList()) {
-
-            int pokemonId = extractPokemonId(item.getUrl());
-
-            pokemons.add(
-                    new Pokemon(
+        return response.getList().stream()
+                .map(pokemonResponse -> {
+                    int pokemonId = extractPokemonId(pokemonResponse.getUrl());
+                    return new Pokemon(
                             pokemonId,
-                            item.getName(),
+                            pokemonResponse.getName(),
                             BuildConfig.API_URL_IMG + pokemonId + ".png"
-                    )
-            );
-        }
-
-        return pokemons;
+                    );
+                })
+                .collect(Collectors.toList());
     }
 
     public static int extractPokemonId(String url) {

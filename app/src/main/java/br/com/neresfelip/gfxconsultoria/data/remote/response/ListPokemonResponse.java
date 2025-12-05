@@ -14,10 +14,6 @@ public class ListPokemonResponse {
     @SerializedName("results")
     private List<PokemonResponse> list;
 
-    public int getCount() {
-        return count;
-    }
-
     public List<PokemonResponse> getList() {
         return list;
     }

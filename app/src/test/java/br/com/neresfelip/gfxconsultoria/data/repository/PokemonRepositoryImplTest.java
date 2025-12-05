@@ -13,13 +13,6 @@ import br.com.neresfelip.gfxconsultoria.domain.helper.PokemonHelper;
 
 public class PokemonRepositoryImplTest {
 
-    /*private PokemonHelper helper;
-
-    @Before
-    public void setup() {
-         helper = new PokemonHelper();
-    }*/
-
     // verifica se os pokemons são filtrados corretamente
     @Test
     public void filterEven_shouldReturnOnlyEvenPokemons() {
