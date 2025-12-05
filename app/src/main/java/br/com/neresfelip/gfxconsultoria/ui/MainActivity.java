@@ -38,8 +38,15 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        setupSwitch();
         setupRecyclerView();
 
+    }
+
+    private void setupSwitch() {
+        binding.switchEven.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> viewModel.loadPokemons(isChecked)
+        );
     }
 
     private void setupRecyclerView() {

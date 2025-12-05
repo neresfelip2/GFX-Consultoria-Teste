@@ -38,7 +38,7 @@ public class MainViewModelTest {
     }
 
     @Test
-    public void testLoadPokemons_success() {
+    public void testLoadAllPokemons_success() {
 
         // DADO
         List<Pokemon> fakeList = Arrays.asList(
@@ -51,10 +51,10 @@ public class MainViewModelTest {
             RepositoryCallback<List<Pokemon>> callback = invocation.getArgument(0);
             callback.onSuccess(fakeList);
             return null;
-        }).when(repository).getPokemons(Mockito.any());
+        }).when(repository).getPokemons(false, Mockito.any());
 
         // AÇÃO: chamar loadPokemons()
-        viewModel.loadPokemons();
+        viewModel.loadPokemons(false);
 
         // ENTÃO: LiveData contém a lista fake
         List<Pokemon> result = viewModel.pokemonList.getValue();

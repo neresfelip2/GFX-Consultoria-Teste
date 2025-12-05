@@ -2,6 +2,9 @@ package br.com.neresfelip.gfxconsultoria.data.repository;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
@@ -10,6 +13,8 @@ import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallb
 import br.com.neresfelip.gfxconsultoria.domain.mapper.PokemonMapper;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PokemonRepositoryImpl implements PokemonRepository {
@@ -21,7 +26,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
     }
 
     @Override
-    public void getPokemons(RepositoryCallback<List<Pokemon>> callback) {
+    public void getPokemons(boolean onlyEven, RepositoryCallback<List<Pokemon>> callback) {
 
         /**
          * Este seria um exemplo de uso do AsyncTask (deprecated) solicitado na tarefa
@@ -52,7 +57,11 @@ public class PokemonRepositoryImpl implements PokemonRepository {
                 if (error != null) {
                     callback.onError(error);
                 } else {
-                    callback.onSuccess(pokemons);
+
+                    if(onlyEven)
+                        callback.onSuccess(filterEven(pokemons));
+                    else
+                        callback.onSuccess(pokemons);
                 }
             }
         }.execute();
@@ -65,7 +74,13 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             public void onResponse(@NonNull Call<ListPokemonResponse> call, @NonNull Response<ListPokemonResponse> response) {
                 if (response.isSuccessful()) {
                     List<Pokemon> list = PokemonMapper.map(response.body());
-                    callback.onSuccess(list);
+
+                    if(onlyEven) {
+                        callback.onSuccess(filterEven(list));
+                    } else {
+                        callback.onSuccess(list);
+                    }
+
                 } else {
                     callback.onError(new Exception("Erro HTTP: " + response.code()));
                 }
@@ -77,6 +92,18 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             }
         });*/
 
+    }
+
+    private List<Pokemon> filterEven(List<Pokemon> list) {
+        List<Pokemon> evenList = new ArrayList<>();
+
+        for (Pokemon p : list) {
+            if (p.getId() % 2 == 0) {
+                evenList.add(p);
+            }
+        }
+
+        return evenList;
     }
 
 }

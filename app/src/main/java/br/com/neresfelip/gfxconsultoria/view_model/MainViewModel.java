@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -26,17 +27,11 @@ public class MainViewModel extends ViewModel {
     @Inject
     public MainViewModel(PokemonRepository repository) {
         this.repository = repository;
-        loadPokemons();
+        loadPokemons(false);
     }
 
-    public void loadPokemons() {
-
-        /** aqui é a chamada para a api
-        não estou fazendo nenhum tipo de tratamento do status da chamada (carregando, sucesso e erro) apenas para mostrar o funcionamento do livedata diretamente
-        mas em projetos reais, eu costumo criar um wrapper para tratar estes status da chamada e utilizo ele no LiveData */
-
-        repository.getPokemons(new RepositoryCallback<>() {
-
+    public void loadPokemons(boolean onlyEven) {
+        repository.getPokemons(onlyEven, new RepositoryCallback<>() {
             @Override
             public void onSuccess(List<Pokemon> data) {
                 _pokemonList.postValue(data);
@@ -44,10 +39,10 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onError(Throwable t) {
-                Log.d(MainViewModel.class.getName(), t.getMessage());
+                Log.d(MainViewModel.class.getName(), Objects.requireNonNull(t.getMessage()));
             }
         });
-
     }
+
 }
 

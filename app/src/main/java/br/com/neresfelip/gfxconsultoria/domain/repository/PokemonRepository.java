@@ -6,5 +6,5 @@ import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallb
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 
 public interface PokemonRepository {
-    void getPokemons(RepositoryCallback<List<Pokemon>> callback);
+    void getPokemons(boolean onlyEven, RepositoryCallback<List<Pokemon>> callback);
 }
