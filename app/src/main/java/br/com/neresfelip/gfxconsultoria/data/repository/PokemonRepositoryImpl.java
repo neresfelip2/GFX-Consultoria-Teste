@@ -5,9 +5,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -17,6 +15,7 @@ import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallb
 import br.com.neresfelip.gfxconsultoria.domain.mapper.PokemonMapper;
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
 import br.com.neresfelip.gfxconsultoria.domain.repository.PokemonRepository;
+import br.com.neresfelip.gfxconsultoria.domain.helper.PokemonHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,11 +62,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
                 if (error != null) {
                     callback.onError(error);
                 } else {
-
-                    if(onlyEven)
-                        callback.onSuccess(filterEven(pokemons));
-                    else
-                        callback.onSuccess(pokemons);
+                    callback.onSuccess(PokemonHelper.filterEven(pokemons, onlyEven));
                 }
             }
         }.execute();
@@ -75,18 +70,12 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
         /** O trecho comentado abaixo é a melhor forma do uso do Retrofit atualmente (utilizando enqueue, que por si só já faz uma chamada assincrona para a API) */
 
-        /*pokeAPI.getPokemons().enqueue(new Callback<>() {
+        pokeAPI.getPokemons().enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<ListPokemonResponse> call, @NonNull Response<ListPokemonResponse> response) {
                 if (response.isSuccessful()) {
-                    List<Pokemon> list = PokemonMapper.map(response.body());
-
-                    if(onlyEven) {
-                        callback.onSuccess(filterEven(list));
-                    } else {
-                        callback.onSuccess(list);
-                    }
-
+                    List<Pokemon> pokemons = PokemonMapper.map(response.body());
+                    callback.onSuccess(PokemonHelper.filterEven(pokemons, onlyEven));
                 } else {
                     callback.onError(new Exception("Erro HTTP: " + response.code()));
                 }
@@ -96,14 +85,8 @@ public class PokemonRepositoryImpl implements PokemonRepository {
             public void onFailure(@NonNull Call<ListPokemonResponse> call, @NonNull Throwable t) {
                 callback.onError(t);
             }
-        });*/
+        });
 
-    }
-
-    public List<Pokemon> filterEven(@NonNull List<Pokemon> list) {
-        return list.stream()
-                .filter(p -> p.getId() % 2 == 0)
-                .collect(Collectors.toList());
     }
 
 }

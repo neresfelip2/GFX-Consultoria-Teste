@@ -9,15 +9,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.neresfelip.gfxconsultoria.domain.model.Pokemon;
+import br.com.neresfelip.gfxconsultoria.domain.helper.PokemonHelper;
 
 public class PokemonRepositoryImplTest {
 
-    private PokemonRepositoryImpl repository;
+    /*private PokemonHelper helper;
 
     @Before
     public void setup() {
-        repository = new PokemonRepositoryImpl(null);
-    }
+         helper = new PokemonHelper();
+    }*/
 
     // verifica se os pokemons são filtrados corretamente
     @Test
@@ -30,7 +31,7 @@ public class PokemonRepositoryImplTest {
                 new Pokemon(4, "charmander", "")
         );
 
-        List<Pokemon> filtered = repository.filterEven(pokemons);
+        List<Pokemon> filtered = PokemonHelper.filterEven(pokemons, true);
 
         assertEquals(2, filtered.size());
         assertEquals(2, filtered.get(0).getId());
@@ -46,7 +47,7 @@ public class PokemonRepositoryImplTest {
                 new Pokemon(3, "venusaur", "")
         );
 
-        List<Pokemon> filtered = repository.filterEven(pokemons);
+        List<Pokemon> filtered = PokemonHelper.filterEven(pokemons, true);
 
         assertEquals(0, filtered.size());
     }
@@ -60,7 +61,7 @@ public class PokemonRepositoryImplTest {
                 new Pokemon(4, "charmander", "")
         );
 
-        List<Pokemon> filtered = repository.filterEven(pokemons);
+        List<Pokemon> filtered = PokemonHelper.filterEven(pokemons, true);
 
         assertEquals(2, filtered.size());
     }
