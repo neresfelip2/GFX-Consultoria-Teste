@@ -19,7 +19,7 @@ public class PokemonRepositoryImplTest {
         repository = new PokemonRepositoryImpl(null);
     }
 
-    // aqui verifica se os pokemons são filtrados corretamente
+    // verifica se os pokemons são filtrados corretamente
     @Test
     public void filterEven_shouldReturnOnlyEvenPokemons() {
 
@@ -37,7 +37,7 @@ public class PokemonRepositoryImplTest {
         assertEquals(4, filtered.get(1).getId());
     }
 
-    // aqui verifica se a lista é vazia quando não há pokemons pares
+    // verifica se a lista é vazia quando não há pokemons pares
     @Test
     public void filterEven_shouldReturnEmptyListWhenNoEven() {
 
@@ -51,7 +51,7 @@ public class PokemonRepositoryImplTest {
         assertEquals(0, filtered.size());
     }
 
-    // aqui verifica se todos os pokemons são retornados quando todos são pares
+    // verifica se todos os pokemons são retornados quando todos são pares
     @Test
     public void filterEven_shouldReturnAllWhenAllEven() {
 
