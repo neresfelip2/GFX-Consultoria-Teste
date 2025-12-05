@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
 import br.com.neresfelip.gfxconsultoria.data.remote.PokemonAPI;
@@ -94,16 +95,10 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
     }
 
-    private List<Pokemon> filterEven(List<Pokemon> list) {
-        List<Pokemon> evenList = new ArrayList<>();
-
-        for (Pokemon p : list) {
-            if (p.getId() % 2 == 0) {
-                evenList.add(p);
-            }
-        }
-
-        return evenList;
+    public List<Pokemon> filterEven(List<Pokemon> list) {
+        return list.stream()
+                .filter(p -> p.getId() % 2 == 0)
+                .collect(Collectors.toList());
     }
 
 }

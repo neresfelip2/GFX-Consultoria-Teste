@@ -39,7 +39,6 @@ public class MainViewModelTest {
 
     @Test
     public void testLoadAllPokemons_success() {
-
         // DADO
         List<Pokemon> fakeList = Arrays.asList(
                 new Pokemon(1,"bulbasaur", BuildConfig.API_URL_IMG + 1 + ".png"),
@@ -48,20 +47,20 @@ public class MainViewModelTest {
 
         // QUANDO o repository for chamado, simula o retorno
         Mockito.doAnswer(invocation -> {
-            RepositoryCallback<List<Pokemon>> callback = invocation.getArgument(0);
+            RepositoryCallback<List<Pokemon>> callback = invocation.getArgument(1);
             callback.onSuccess(fakeList);
             return null;
-        }).when(repository).getPokemons(false, Mockito.any());
+        }).when(repository).getPokemons(Mockito.eq(false), Mockito.any());
 
-        // AÇÃO: chamar loadPokemons()
+        // AÇÃO
         viewModel.loadPokemons(false);
 
-        // ENTÃO: LiveData contém a lista fake
+        // ENTÃO
         List<Pokemon> result = viewModel.pokemonList.getValue();
-
         assertNotNull(result);
         assertEquals(2, result.size());
         assertEquals("bulbasaur", result.get(0).getName());
     }
+
 }
 
