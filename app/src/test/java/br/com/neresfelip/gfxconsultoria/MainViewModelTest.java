@@ -54,7 +54,7 @@ public class MainViewModelTest {
         }).when(repository).getPokemons(Mockito.any());
 
         // AÇÃO: chamar loadPokemons()
-        viewModel.loadPokemonsForTest();
+        viewModel.loadPokemons();
 
         // ENTÃO: LiveData contém a lista fake
         List<Pokemon> result = viewModel.pokemonList.getValue();

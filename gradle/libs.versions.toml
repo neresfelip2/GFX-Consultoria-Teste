@@ -13,6 +13,7 @@ loggingInterceptor = "5.3.2"
 hilt = "2.57.2"
 mockito = "5.7.0"
 picasso = "2.8"
+archCore = "2.2.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -29,6 +30,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito"}
+arch-core = { module = "androidx.arch.core:core-testing", version.ref = "archCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

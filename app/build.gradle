@@ -58,6 +58,7 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     testImplementation libs.mockito
+    testImplementation libs.arch.core
 
     // Retrofit
     implementation libs.retrofit

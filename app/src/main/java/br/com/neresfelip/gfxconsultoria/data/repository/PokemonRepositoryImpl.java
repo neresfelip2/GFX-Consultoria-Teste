@@ -4,8 +4,6 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
 import br.com.neresfelip.gfxconsultoria.data.remote.PokemonAPI;
 import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallback;

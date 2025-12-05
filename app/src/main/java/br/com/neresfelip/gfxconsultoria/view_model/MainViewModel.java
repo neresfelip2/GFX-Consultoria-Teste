@@ -29,11 +29,7 @@ public class MainViewModel extends ViewModel {
         loadPokemons();
     }
 
-    public void loadPokemonsForTest() {  // usado só no teste unitário
-        loadPokemons();
-    }
-
-    private void loadPokemons() {
+    public void loadPokemons() {
 
         /** aqui é a chamada para a api
         não estou fazendo nenhum tipo de tratamento do status da chamada (carregando, sucesso e erro) apenas para mostrar o funcionamento do livedata diretamente
