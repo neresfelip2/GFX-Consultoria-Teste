@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 import br.com.neresfelip.gfxconsultoria.data.remote.response.ListPokemonResponse;
 import br.com.neresfelip.gfxconsultoria.data.remote.PokemonAPI;
 import br.com.neresfelip.gfxconsultoria.data.repository.callback.RepositoryCallback;
@@ -22,6 +24,7 @@ public class PokemonRepositoryImpl implements PokemonRepository {
 
     private final PokemonAPI pokeAPI;
 
+    @Inject
     public PokemonRepositoryImpl(PokemonAPI pokeAPI) {
         this.pokeAPI = pokeAPI;
     }
